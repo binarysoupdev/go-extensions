@@ -14,3 +14,9 @@ func New(msg string) error {
 func Format(format string, a ...any) error {
 	return fmt.Errorf(format, a...)
 }
+
+// Check if the error is the given the type.
+func Is[T error](err error) bool {
+	_, ok := err.(T)
+	return ok
+}
