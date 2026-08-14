@@ -7,6 +7,7 @@ import (
 	"github.com/binarysoupdev/go-extensions/errors"
 )
 
+// Copy the contents of dest to new file src.
 func Copy(dest string, src string) error {
 	s, err := os.Open(src)
 	if err != nil {
