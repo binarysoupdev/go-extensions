@@ -2,10 +2,10 @@ package json_test
 
 import (
 	"fmt"
+	"path/filepath"
 	"testing"
 
-	"github.com/binarysoupdev/go-commando/json"
-	"github.com/binarysoupdev/tinsel/file"
+	"github.com/binarysoupdev/go-extensions/json"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -28,7 +28,7 @@ func TestLoaderValidatePathReturnsErrorWhenPathNotFound(t *testing.T) {
 
 func TestLoaderValidatePathReturnsNoErrorWhenPathValid(t *testing.T) {
 	//-- arrange
-	loader := json.NewLoader[TestObject](file.NewPath(t, ""))
+	loader := json.NewLoader[TestObject](t.TempDir())
 
 	//-- act
 	res := loader.ValidatePath()
@@ -50,7 +50,7 @@ func TestLoaderUnmarshalReturnsErrorWhenUnmarshalJsonFileFails(t *testing.T) {
 
 func TestLoaderUnmarshalReturnsObjectAndNoWhenValid(t *testing.T) {
 	//-- arrange
-	loader := json.NewLoader[TestObject](file.NewPath(t, "data.json"))
+	loader := json.NewLoader[TestObject](filepath.Join(t.TempDir(), "data.json"))
 
 	OBJECT := TestObject{
 		Data: "foobar",
